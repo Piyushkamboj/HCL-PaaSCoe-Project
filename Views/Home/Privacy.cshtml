@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Basic Commands Used";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>* version=$(az aks get-versions -l "West Europe" --query 'orchestrators[-1].orchestratorVersion' -o tsv)</p>
+
+<p>* az group create --name AKSRG --location "West Europe"</p>
+
+<p>* az aks create --resource-group AKSRG --name akssaurav --enable-addons monitoring --kubernetes-version $version --generate-ssh-keys --location "West Europe"</p>
+
+<p>* az acr create --resource-group AKSRG --name acrsaurav --sku Standard --location "West Europe"</p>
+
+<p>* CLIENT_ID=$(az aks show --resource-group AKSRG --name akssaurav --query "servicePrincipalProfile.clientId" --output tsv)</p>
+
+<p>* ACR_ID=$(az acr show --name acrsaurav --resource-group AKSRG --query "id" --output tsv)</p>
+
+<p>* az role assignment create --assignee $CLIENT_ID --role acrpull --scope $ACR_ID</p>
+
+<p>* az sql server create -l "West Europe" -g AKSRG -n sqlsaurav -u sqladmin -p Passw0rdPassw0rd</p>
+
+<p>* az sql db create -g AKSRG -s sqlsaurav -n Employeedb --service-objective S0</p>
+
+<p>* az aks get-credentials --resource-group AKSRG --name akssaurav</p>
